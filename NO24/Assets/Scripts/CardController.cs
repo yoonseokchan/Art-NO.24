@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveQuad : MonoBehaviour
+public class CardController : MonoBehaviour
 {
     public LayerMask cardLayer;
     public LayerMask backgroundLayer;
@@ -20,6 +20,8 @@ public class MoveQuad : MonoBehaviour
     public List<Vector3> HandPoint = new List<Vector3>();
 
     public GameObject CardTemp;
+
+    public CardModel tempCardModel;
 
     [SerializeField] private Vector3 curveStart = new Vector3(2f, -0.7f, 0);
     [SerializeField] private Vector3 curveEnd = new Vector3(-2f, -0.7f, 0);
@@ -135,6 +137,7 @@ public class MoveQuad : MonoBehaviour
     public void DrawCard()
     {
         GameObject temp = Instantiate(CardTemp);
+        temp.AddComponent<CardInfo>().cardModel = tempCardModel;
         CardList.Add(temp);
         SetCard();
     }

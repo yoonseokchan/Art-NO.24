@@ -171,6 +171,7 @@ MonoBehaviour:
   HandPoint: []
   CardTemp: {fileID: 3199475196983856677, guid: e65e8add583f1ca4ea25deca28fb26f6,
     type: 3}
+  tempCardModel: {fileID: 11400000, guid: 8a188fec887b1704da4693d7a9648954, type: 2}
   curveStart: {x: 8, y: -4, z: 0}
   curveEnd: {x: -8, y: -4, z: 0}
   handOffset: {x: 0, y: -4}
@@ -507,7 +508,7 @@ Light:
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 5000
-  m_UseColorTemperature: 1
+  m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
