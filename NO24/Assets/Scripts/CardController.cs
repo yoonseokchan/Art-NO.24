@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CardController : MonoBehaviour
 {
@@ -10,9 +11,14 @@ public class CardController : MonoBehaviour
 
     public GameObject pickObject;
     public Transform pickTransform;
+    public Transform MyDeck;
+    public Transform UsedDeck;
+
     public int pickCardIndex;
 
     private bool isDragging = false;
+    private bool isSequencing = false;
+
     private Vector3 offset;
     private bool _mouseInsideHand;
 
@@ -27,6 +33,8 @@ public class CardController : MonoBehaviour
     [SerializeField] private Vector3 curveEnd = new Vector3(-2f, -0.7f, 0);
     [SerializeField] private Vector2 handOffset = new Vector2(0, -0.3f);
     [SerializeField] private Vector2 handSize = new Vector2(9, 1.7f);
+
+    
 
     private void Start()
     {
@@ -112,6 +120,9 @@ public class CardController : MonoBehaviour
 
     public void UseCard()
     {
+        if (isSequencing)
+            return;
+
         if (CardList.Count > 0)
         {
             
@@ -143,6 +154,7 @@ public class CardController : MonoBehaviour
         {
             GameObject temp = Instantiate(CardTemp);
             temp.AddComponent<CardInfo>().cardModel = drawTemp;
+            temp.transform.position = MyDeck.transform.position;
             CardList.Add(temp);
             SetCard();
         }
@@ -155,10 +167,11 @@ public class CardController : MonoBehaviour
 
     public void SetCard()
     {
-        if (CardList.Count < 1)
+        if (isSequencing)
             return;
 
-
+        if (CardList.Count < 1)
+            return;
 
         HandPoint = GenerateCurvePoints(curveStart, Vector3.zero, curveEnd, CardList.Count, handOffset);
 
@@ -167,13 +180,11 @@ public class CardController : MonoBehaviour
         int cardIndex = 0;
         for (int i = HandPoint.Count - 1; i >= 0; i--)
         {
-            CardList[cardIndex].transform.position = HandPoint[i];
+            CardList[cardIndex].transform.DOMove(HandPoint[i] , 0.1f).SetEase(Ease.Linear).OnComplete(()=>{ isSequencing = false; });
             CardList[cardIndex].transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, HandPointRotation[i]));
             cardIndex += 1;
 
-            if (cardIndex >= CardList.Count) break;
-
-            
+            if (cardIndex >= CardList.Count) break;            
         }
     }
 

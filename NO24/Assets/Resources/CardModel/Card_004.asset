@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Card_004
   m_EditorClassIdentifier: 
   cardType: 0
-  MainImage: {fileID: 2800000, guid: 7b5120dc9ac262f43abdbea101184c25, type: 3}
+  MainImage: {fileID: 2800000, guid: bcaba4482c914cd42b64128412d34f13, type: 3}
   cost: 1
   value: 2
