@@ -114,11 +114,12 @@ public class CardController : MonoBehaviour
     {
         if (CardList.Count > 0)
         {
-            // 리스트에서 첫 번째 카드를 가져옵니다.
+            
             GameObject cardToUse = CardList[pickCardIndex];
 
-            // 카드 사용 코드 작성
             Debug.Log("카드를 사용합니다: " + cardToUse.name);
+
+            CardSystem.instance.AddToUsedCards(CardSystem.instance.cardHand[pickCardIndex]);
 
             // 사용한 카드를 리스트에서 제거합니다.
             CardList.RemoveAt(pickCardIndex);
@@ -136,10 +137,20 @@ public class CardController : MonoBehaviour
 
     public void DrawCard()
     {
-        GameObject temp = Instantiate(CardTemp);
-        temp.AddComponent<CardInfo>().cardModel = tempCardModel;
-        CardList.Add(temp);
-        SetCard();
+        CardModel drawTemp = CardSystem.instance.DrawCard();
+       
+        if(drawTemp != null)
+        {
+            GameObject temp = Instantiate(CardTemp);
+            temp.AddComponent<CardInfo>().cardModel = drawTemp;
+            CardList.Add(temp);
+            SetCard();
+        }
+        else
+        {
+            CardSystem.instance.ShuffleUsedCardsIntoDeck();
+        }
+  
     }
 
     public void SetCard()
