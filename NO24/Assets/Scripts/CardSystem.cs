@@ -13,7 +13,8 @@ public class CardSystem : MonoBehaviour
     {
         DRAW,
         USECARD,
-        MOVECARD
+        MOVECARD,
+        ENDTurn
     }
 
     public static CardSystem instance;

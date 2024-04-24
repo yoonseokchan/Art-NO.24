@@ -118,6 +118,41 @@ public class CardController : MonoBehaviour
         }
     }
 
+    public void EndTurn()
+    {
+        if (isSequencing)
+            return;
+
+        if (CardList.Count > 0)
+        {
+            isSequencing = true;
+
+            for (int i = CardList.Count - 1; i >= 0; i--)
+            {
+                GameObject cardToUse = CardList[i];
+
+                CardSystem.instance.AddToUsedCards(CardSystem.instance.cardHand[i]);
+
+                CardList.RemoveAt(i);
+
+                cardToUse.transform.DOPunchScale(Vector3.one, 0.1f).OnComplete(() =>
+                {
+                    cardToUse.transform.DOScale(Vector3.zero, 0.1f);
+
+                    cardToUse.transform.DOMove(UsedDeck.position, 0.1f).SetEase(Ease.Linear).OnComplete(() =>
+                    {
+                        isSequencing = false;
+
+                        Destroy(cardToUse);
+                    });
+                });
+
+            }
+        }
+      
+        SetCard();
+    }
+
     public void UseCard()
     {
         if (isSequencing)
@@ -125,7 +160,8 @@ public class CardController : MonoBehaviour
 
         if (CardList.Count > 0)
         {
-            
+            isSequencing = true;
+
             GameObject cardToUse = CardList[pickCardIndex];
 
             Debug.Log("카드를 사용합니다: " + cardToUse.name);
@@ -135,8 +171,20 @@ public class CardController : MonoBehaviour
             // 사용한 카드를 리스트에서 제거합니다.
             CardList.RemoveAt(pickCardIndex);
 
-            // 사용한 카드를 파괴합니다.
-            Destroy(cardToUse);
+            cardToUse.transform.DOPunchScale(Vector3.one, 0.1f).OnComplete(() =>
+            {
+                cardToUse.transform.DOScale(Vector3.zero, 0.1f);
+
+                cardToUse.transform.DOMove(UsedDeck.position, 0.1f).SetEase(Ease.Linear).OnComplete(() =>
+                {
+                    isSequencing = false;
+                    // 사용한 카드를 파괴합니다.
+                    Destroy(cardToUse);
+                });
+            });
+
+          
+            
         }
         else
         {
