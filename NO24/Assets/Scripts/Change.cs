@@ -7,6 +7,6 @@ public class Change : MonoBehaviour
 {
     public void ChangeSceneBTn()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Select");
     }
 }
