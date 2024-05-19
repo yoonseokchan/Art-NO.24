@@ -13,8 +13,21 @@ public class CardModel : ScriptableObject
         SHILD
     }
 
+    public enum ACTION
+    {
+        NONE,
+        DRAW,
+        MANAUP
+    }
+
     public CARDTYPE cardType;
+    public string cardText;
+    public string cardName;
+
     public Texture2D MainImage;
     public int cost;
     public int value;
+
+    public Buff buffModel;
+
 }

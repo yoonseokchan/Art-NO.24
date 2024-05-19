@@ -88,12 +88,12 @@ public class CardController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, player))
             {
-                UseCard();
+                UseCard(1);
             }
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, enemy))
             {
-                UseCard();
+                UseCard(2);
             }
 
             SetCard();
@@ -144,6 +144,7 @@ public class CardController : MonoBehaviour
                         isSequencing = false;
 
                         Destroy(cardToUse);
+                       
                     });
                 });
 
@@ -153,12 +154,12 @@ public class CardController : MonoBehaviour
         SetCard();
     }
 
-    public void UseCard()
+    public void UseCard(int slotIndex)
     {
         if (isSequencing)
             return;
 
-        if (CardList.Count > 0)
+        if (CardList.Count > 0 && pickCardIndex >= 0)
         {
             isSequencing = true;
 
@@ -183,8 +184,9 @@ public class CardController : MonoBehaviour
                 });
             });
 
-          
-            
+            pickCardIndex = -1;
+
+
         }
         else
         {
@@ -215,9 +217,7 @@ public class CardController : MonoBehaviour
 
     public void SetCard()
     {
-        if (isSequencing)
-            return;
-
+      
         if (CardList.Count < 1)
             return;
 
