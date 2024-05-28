@@ -12,6 +12,7 @@ public class Actor : ScriptableObject
         BOSS
     }
 
+    public Texture2D texture;
     public int health;
 
 }

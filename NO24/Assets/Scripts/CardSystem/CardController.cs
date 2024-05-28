@@ -55,6 +55,9 @@ public class CardController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (isSequencing)
+                return;
+
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -105,14 +108,18 @@ public class CardController : MonoBehaviour
         }
 
         if (isDragging)
-        {
+        {         
+
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, backgroundLayer))
             {
-                Vector3 newPos = hit.point - offset;
-                pickObject.transform.position = new Vector3(newPos.x, newPos.y, 0);
+                if(pickObject != null)
+                {
+                    Vector3 newPos = hit.point - offset;
+                    pickObject.transform.position = new Vector3(newPos.x, newPos.y, 0);
+                }               
             }
 
         }
