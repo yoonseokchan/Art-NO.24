@@ -243,7 +243,8 @@ MonoBehaviour:
   - {fileID: 1114289966}
   - {fileID: 43376592}
   playerMana: 0
-  gameState: 0
+  currentStage: 1
+  gameState: 1
 --- !u!114 &30367586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,8 +257,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e425fcdacc558894fa597cb26d2c8a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStageIndex: 1
   currentStage: {fileID: 0}
-  stageList: []
+  stageList:
+  - {fileID: 11400000, guid: d2d218c5cf2f69747a5fef30c0a47944, type: 2}
+  - {fileID: 11400000, guid: e9795bc97a0d0974aa4a95ab0fea861d, type: 2}
 --- !u!1 &43376587
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,9 +381,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c35ac487ab10e498fd2c5dc95f22e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actor: {fileID: 0}
-  MaxHp: 0
+  actor: {fileID: 11400000, guid: 7e7e8b64e00c10e4a959ec2b5aec08b5, type: 2}
+  maxHp: 0
   currentHP: 0
+  attack: 0
   buffs: []
 --- !u!1 &170084344
 GameObject:
@@ -486,7 +491,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -921,9 +926,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c35ac487ab10e498fd2c5dc95f22e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actor: {fileID: 0}
-  MaxHp: 0
+  actor: {fileID: 11400000, guid: f682f0eaa945ad24389144ce017d7409, type: 2}
+  maxHp: 0
   currentHP: 0
+  attack: 0
   buffs: []
 --- !u!64 &1114289967
 MeshCollider:
@@ -1345,7 +1351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1801632510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1359,8 +1365,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 0}
-  MaxHp: 0
+  maxHp: 0
   currentHP: 0
+  attack: 0
   buffs: []
 --- !u!64 &1801632511
 MeshCollider:
@@ -1404,7 +1411,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: fe7e7bf324521ea46aded2284638e3ce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1617,7 +1624,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: d056d040683f4d74299ac6fda686f6cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1674,9 +1681,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c35ac487ab10e498fd2c5dc95f22e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actor: {fileID: 0}
-  MaxHp: 0
+  actor: {fileID: 11400000, guid: 8dadcee24eb8d07478ca875750157418, type: 2}
+  maxHp: 0
   currentHP: 0
+  attack: 0
   buffs: []
 --- !u!1 &2083458688
 GameObject:
@@ -1761,9 +1769,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 30367581}
-        m_TargetAssemblyTypeName: CardController, Assembly-CSharp
-        m_MethodName: EndTurn
+      - m_Target: {fileID: 30367585}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayerEndTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -8,11 +8,7 @@ public class Initalizer : MonoBehaviour
     {
         GameManager.instance.Initialize();
         StageGameManager.instance.Initialize();
+        GameManager.instance.CardInitialize();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

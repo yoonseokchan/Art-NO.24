@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b121cf90145923f46b1098570773a823, type: 3}
-  m_Name: Card_001
+  m_Script: {fileID: 11500000, guid: f363fd5e1b61dc9448f4ab7b35e8e0f7, type: 3}
+  m_Name: Player_001
   m_EditorClassIdentifier: 
-  cardType: 0
-  cardText: 
-  cardName: 
-  MainImage: {fileID: 2800000, guid: f83c532c1903a5c4eb78415dedc47be6, type: 3}
-  cost: 1
-  value: 2
-  buffModel: {fileID: 0}
+  texture: {fileID: 0}
+  health: 0

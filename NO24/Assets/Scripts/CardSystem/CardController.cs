@@ -34,7 +34,13 @@ public class CardController : MonoBehaviour
     [SerializeField] private Vector2 handOffset = new Vector2(0, -0.3f);
     [SerializeField] private Vector2 handSize = new Vector2(9, 1.7f);
 
-    
+    public static CardController instance;
+
+    public void Awake()
+    {
+        instance = this;
+    }
+
 
     private void Start()
     {
@@ -91,14 +97,14 @@ public class CardController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, player))
             {
-                UseCard(1);
+                UseCard(hit.collider.gameObject.GetComponent<ActorCard>());
             }
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, enemy))
             {
-                UseCard(2);
+                UseCard(hit.collider.gameObject.GetComponent<ActorCard>());
             }
-
+            pickCardIndex = -1;
             SetCard();
         }
 
@@ -161,7 +167,7 @@ public class CardController : MonoBehaviour
         SetCard();
     }
 
-    public void UseCard(int slotIndex)
+    public void UseCard(ActorCard actorcard)
     {
         if (isSequencing)
             return;
@@ -175,6 +181,8 @@ public class CardController : MonoBehaviour
             Debug.Log("카드를 사용합니다: " + cardToUse.name);
 
             CardSystem.instance.AddToUsedCards(CardSystem.instance.cardHand[pickCardIndex]);
+
+            GameManager.instance.UsedCard(cardToUse.GetComponent<CardInfo>(), actorcard);
 
             // 사용한 카드를 리스트에서 제거합니다.
             CardList.RemoveAt(pickCardIndex);
@@ -214,12 +222,7 @@ public class CardController : MonoBehaviour
             temp.transform.position = MyDeck.transform.position;
             CardList.Add(temp);
             SetCard();
-        }
-        else
-        {
-            CardSystem.instance.ShuffleUsedCardsIntoDeck();
-        }
-  
+        }   
     }
 
     public void SetCard()

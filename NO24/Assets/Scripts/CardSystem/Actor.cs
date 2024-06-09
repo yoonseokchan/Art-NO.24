@@ -14,5 +14,6 @@ public class Actor : ScriptableObject
 
     public Texture2D texture;
     public int health;
+    public int attack;
 
 }

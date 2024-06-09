@@ -19,40 +19,12 @@ public class CardSystem : MonoBehaviour
 
     public static CardSystem instance;
 
-    // 해당 씬에서만 인스턴스를 반환하는 메서드
-    public static CardSystem GetInstanceInScene()
-    {
-        if (instance == null)
-        {
-            // 현재 씬에서 CardSystem을 찾아 인스턴스로 설정
-            instance = FindObjectOfType<CardSystem>();
-        }
-        return instance;
-    }
 
     private void Awake()
-    {
-        // 이미 인스턴스가 있다면 현재 게임 오브젝트를 파괴
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            // 인스턴스를 설정하고 파괴되지 않도록 설정
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-
-    // 해당 씬을 나갈 때 인스턴스를 파괴
-    private void OnDestroy()
-    {
-        if (instance == this)
-        {
-            instance = null;
-        }
-    }
+    {      
+        // 인스턴스를 설정하고 파괴되지 않도록 설정
+        instance = this;      
+    } 
 
     public void Start()
     {
@@ -63,13 +35,16 @@ public class CardSystem : MonoBehaviour
         }
     }
 
-
     public CardModel DrawCard()
     {
         // 덱이 비어있는지 확인
         if (cardDeck.Count == 0)
-        {         
-            return null;
+        {
+            ShuffleUsedCardsIntoDeck();
+            if(cardDeck.Count == 0)
+            {
+                return null;
+            }            
         }
 
         // 덱에서 카드 한 장을 뽑아옴
@@ -133,7 +108,7 @@ public class CardSystem : MonoBehaviour
         // 사용한 카드가 없다면 함수를 종료
         if (cardUsed.Count == 0)
         {
-            Debug.Log("사용한 카드가 없습니다.");
+            Debug.Log("덱에 카드가 없습니다.");
             return;
         }
 

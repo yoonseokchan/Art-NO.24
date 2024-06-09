@@ -23,6 +23,7 @@ public class StageGameManagerEditor : Editor
 #endif
 public class StageGameManager : MonoBehaviour
 {
+    public int currentStageIndex;
     public StageModel currentStage;
     public StageModel[] stageList;
 
@@ -47,9 +48,22 @@ public class StageGameManager : MonoBehaviour
         if (initialized)
             return;
 
+        SetCurrentStageModel();
         GameManager.instance.InitModel(currentStage);
 
         initialized = true;
+    }
+
+    public void SetCurrentStageModel()
+    {
+        for (int i = 0; i < stageList.Length; i++)
+        {
+            if(stageList[i].stageIndex == currentStageIndex)
+            {
+                currentStage = stageList[i];
+                break;
+            }           
+        }
     }
 
 }

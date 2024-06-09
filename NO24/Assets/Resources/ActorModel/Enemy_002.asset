@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f363fd5e1b61dc9448f4ab7b35e8e0f7, type: 3}
-  m_Name: Actor_001
+  m_Name: Enemy_002
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
   health: 0
