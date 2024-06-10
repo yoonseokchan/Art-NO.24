@@ -43,6 +43,12 @@ public class GameManager : MonoBehaviour
     public void UsedCard(CardInfo cardInfo , ActorCard actorcard)
     {
         actorcard.currentHP -= cardInfo.cardModel.value;
+        CheckGameEnd();
+    }
+
+    public void CheckGameEnd()
+    {
+
     }
 
     public void Initialize()
