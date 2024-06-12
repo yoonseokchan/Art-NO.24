@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
 
     public int currentStage;
 
+    bool playerDefeated = false;
+    bool enemiesDefeated = false;
+    int enemieCount = 0;
+
     public enum GAMESTATE
     {
         NONE,
@@ -42,13 +46,37 @@ public class GameManager : MonoBehaviour
 
     public void UsedCard(CardInfo cardInfo , ActorCard actorcard)
     {
+        Debug.Log($"{cardInfo.cardModel.cardName} 카드를 사용");
         actorcard.currentHP -= cardInfo.cardModel.value;
         CheckGameEnd();
     }
 
     public void CheckGameEnd()
     {
+        if(player.currentHP <= 0)
+        {
+            playerDefeated = true;
 
+            Debug.Log("playerDefeated");
+        }
+
+        enemieCount = enemy.Length;
+
+        for (int i = 0; i < enemy.Length; i++)
+        {
+            if(enemy[i].currentHP <= 0)
+            {
+                enemieCount -= 1;               
+            }
+        }
+
+        if(enemieCount <= 0)
+        {
+            enemiesDefeated = true;
+            Debug.Log("enemiesDefeated");
+        }
+
+        CheckEndConditions();
     }
 
     public void Initialize()
@@ -219,19 +247,13 @@ public class GameManager : MonoBehaviour
 
     private void CheckEndConditions()
     {
-        bool playerDefeated = false;
-        bool enemiesDefeated = false;
-
-        // Check end conditions code here
+     
 
         if (playerDefeated || enemiesDefeated)
         {
             ChangeState(GAMESTATE.GAMEREWARD);
         }
-        else
-        {
-            ChangeState(GAMESTATE.DRAWCARD);
-        }
+      
     }
 
     private void HandleRewardsStart()
@@ -242,6 +264,6 @@ public class GameManager : MonoBehaviour
     private void HandleRewards()
     {
         // Handle rewards code
-        ChangeState(GAMESTATE.GAMEEND);
+        //ChangeState(GAMESTATE.GAMEEND);
     }
 }

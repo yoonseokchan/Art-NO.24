@@ -79,11 +79,11 @@ public class CardController : MonoBehaviour
                 // 인덱스가 -1보다 큰 경우는 리스트 안에 존재하는 경우입니다.
                 if (pickCardIndex >= 0)
                 {
-                    Debug.Log("레이캐스트로 잡은 카드의 인덱스: " + pickCardIndex);
+                    //Debug.Log("레이캐스트로 잡은 카드의 인덱스: " + pickCardIndex);
                 }
                 else
                 {
-                    Debug.Log("레이캐스트로 잡은 카드가 리스트에 없습니다.");
+                    //Debug.Log("레이캐스트로 잡은 카드가 리스트에 없습니다.");
                 }
             }
         }
@@ -177,8 +177,6 @@ public class CardController : MonoBehaviour
             isSequencing = true;
 
             GameObject cardToUse = CardList[pickCardIndex];
-
-            Debug.Log("카드를 사용합니다: " + cardToUse.name);
 
             CardSystem.instance.AddToUsedCards(CardSystem.instance.cardHand[pickCardIndex]);
 
