@@ -1682,8 +1682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 11400000, guid: 8dadcee24eb8d07478ca875750157418, type: 2}
-  maxHp: 0
-  currentHP: 0
+  maxHp: 10
+  currentHP: 10
   attack: 0
   buffs: []
 --- !u!1 &2083458688
